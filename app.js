@@ -1,46 +1,66 @@
-let submitBtn = document.getElementById("submitBtn");
-let currentTasks = document.getElementById("currentTasks");
-let doneTasks = document.getElementById("doneTasks");
+let submitBtn = document.querySelector("#submitBtn");
+let currentTasks = document.querySelector("#currentTasks");
+let doneTasks = document.querySelector("#doneTasks");
 
 // comportement lorsqu'on clique sur le bouton ajouter
 submitBtn.addEventListener("click", () => {
     // stocker la valeur de l'input dans une variable
-    let newTask = document.getElementById("newTask").value;
+    let newTask = document.querySelector("#newTask").value;
     // créer un nouvel élément dans la liste
     let newItem = document.createElement("li");
     // gérer le contenu de l'élément
-    newItem.innerHTML = "<div class='mb-1'>" + newTask + "<button id='checkBtn' class='btn btn-outline-success ms-1'><i class='fa-solid fa-check'></i></button><button id='editBtn' class='btn btn-outline-primary ms-1'><i class='fa-regular fa-pen-to-square'></i></button><button id='deleteBtn' class='btn btn-outline-danger ms-1'><i class='fa-regular fa-trash-can'></i></button></div>";
+    newItem.innerHTML = newTask;
     // ajouter l'élément enfant (l'item de la liste) à l'élément parent (la liste ul) pour qu'il s'affiche
     currentTasks.appendChild(newItem);
-    // vider l'input
-    document.getElementById("newTask").value = "";
 
-    // stocker le bouton Edit dans une variable et gérer son comportement
-    let editBtn = document.getElementById("editBtn");
-    editBtn.addEventListener("click", () => {
-        // afficher un input affichant le contenu de l'item 
-        newItem.innerHTML = "<div class='d-flex'><input type='text' class='form-control w-75 me-1' id='updatedTask' value='" + newItem.innerText + "'><button id='updateBtn' class='btn btn-outline-success ms-2'><i class='fa-solid fa-floppy-disk'></i></button></div>";
+    // créer tous les boutons/icônes potentiels dans des variables et leur attribuer des classes et id
+    let checkBtn = document.createElement("i");
+    checkBtn.classList.add("btn", "btn-outline-success", "fa-solid", "fa-check", "ms-1", "my-1");
+    checkBtn.setAttribute('id', 'checkBtn');
 
-        // stocker le bouton Update dans une variable et gérer son comportement
-        let updateBtn = document.getElementById('updateBtn');
-        updateBtn.addEventListener("click", () => {
-            let updatedTask = document.getElementById('updatedTask').value;
-            newItem.innerHTML = updatedTask + "<button id='checkBtn' class='btn btn-outline-success ms-2'><i class='fa-solid fa-check'></i></button><button id='editBtn' class='btn btn-outline-primary ms-2'><i class='fa-regular fa-pen-to-square'></i></button><button id='deleteBtn' class='btn btn-outline-danger ms-2'><i class='fa-regular fa-trash-can'></i></button>";
-        });
-    });
+    let editBtn = document.createElement("i");
+    editBtn.classList.add("btn", "btn-outline-primary", "fa-solid", "fa-pen-to-square", "ms-1", "my-1");
+    editBtn.setAttribute('id', 'editBtn');
 
-        // stocker le bouton Delete dans une variable et gérer son comportement
-    let deleteBtn = document.getElementById("deleteBtn");
-    deleteBtn.addEventListener("click", () => {
-        currentTasks.removeChild(newItem)
-    });
+    let deleteBtn = document.createElement("i");
+    deleteBtn.classList.add("btn", "btn-outline-danger", "fa-solid", "fa-trash-can", "ms-1", "my-1");
+    deleteBtn.setAttribute('id', 'deleteBtn');
 
-        // stocker le bouton Check dans une variable et gérer son comportement
-    let checkBtn = document.getElementById("checkBtn");
+    let updateBtn = document.createElement("i");
+    updateBtn.classList.add("btn", "btn-outline-success", "fa-solid", "fa-floppy-disk", "ms-1", "my-1");
+    updateBtn.setAttribute('id', 'updateBtn');
+
+    // fonction qui affiche les boutons
+    let showButtons = function () {
+    newItem.appendChild(checkBtn);
+    newItem.appendChild(editBtn);
+    newItem.appendChild(deleteBtn);}
+
+    showButtons ();
+
+    // vider l'input une fois la tâche envoyée
+    document.querySelector("#newTask").value = "";
+
+    // comportement au clic du bouton VALIDER
     checkBtn.addEventListener("click", () => {
         doneTasks.appendChild(newItem);
-        deleteBtn.addEventListener("click", () => {
-            doneTasks.removeChild(newItem)
+    });
+
+    // comportement au clic du bouton EDITER
+    editBtn.addEventListener("click", () => {
+        // afficher un input affichant le contenu de l'item 
+        newItem.innerHTML = "<div class='d-flex'><input type='text' class='form-control w-75 me-1' id='updatedTask' value='" + newItem.innerText + "'></div>";
+        newItem.appendChild(updateBtn);
+        // bouton qui enregistre les modifications
+        updateBtn.addEventListener("click", () => {
+            let updatedTask = document.getElementById("updatedTask").value;
+            newItem.innerHTML = updatedTask;
+            showButtons ();
         });
+    });
+
+    // comportement au clic du bouton SUPPRIMER
+    deleteBtn.addEventListener('click', () => {
+        newItem.remove();
     });
 })
