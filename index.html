@@ -10,26 +10,29 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="bg-primary-subtle">
     <div class="container text-center my-3">
         <h1>TO-DO LIST</h1>
     </div>
-    <div class="container mt-5 w-50 border border-secondary rounded p-3">
+    <div class="bg-light container mt-5 w-50 border border-secondary rounded p-3">
+        <div class="container">
             <label for="newTask" class="form-label w-50">Nouvelle tâche :</label>
             <div class="container d-flex mb-5">
                 <input type="text" class="form-control me-4" id="newTask" placeholder="Saisir une tâche">
-                <button type="submit" class="btn btn-outline-secondary" id="submitBtn"><i class="fa-solid fa-plus"></i></button>
+                <button type="submit" class="btn btn-outline-secondary" id="submitBtn"><i
+                        class="fa-solid fa-plus"></i></button>
             </div>
+        </div>
+        <div class="d-none container mb-5 currentContainer">
             <hr>
-        <p>Tâches en cours :</p>
-        <div class="container mb-5">
-            <ul id="currentTasks">
+            <p>Tâches en cours :</p>
+            <ul id="currentTasks" class="overflow-auto">
             </ul>
         </div>
-        <hr>
-        <p>Tâches accomplies :</p>
-        <div class="container">
-            <ul id="doneTasks">
+        <div class="d-none container mb-5 doneContainer">
+            <hr>
+            <p>Tâches accomplies :</p>
+            <ul id="doneTasks" class="overflow-auto">
             </ul>
         </div>
     </div>
