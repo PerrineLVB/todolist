@@ -50,8 +50,9 @@ submitBtn.addEventListener("click", () => {
     editBtn.addEventListener("click", () => {
         // afficher un input affichant le contenu de l'item 
         newItem.innerHTML = "<div class='d-flex'><input type='text' class='form-control w-75 me-1' id='updatedTask' value='" + newItem.innerText + "'></div>";
+        // affichage du bouton qui enregistre les modifications
         newItem.appendChild(updateBtn);
-        // bouton qui enregistre les modifications
+        // comportement au clic du bouton
         updateBtn.addEventListener("click", () => {
             let updatedTask = document.getElementById("updatedTask").value;
             newItem.innerHTML = updatedTask;
@@ -63,4 +64,4 @@ submitBtn.addEventListener("click", () => {
     deleteBtn.addEventListener('click', () => {
         newItem.remove();
     });
-})
+});
