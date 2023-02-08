@@ -8,22 +8,22 @@ let doneContainer = document.querySelector(".doneContainer");
 submitBtn.addEventListener("click", () => {
     // stocker la valeur de l'input dans une variable
     let newTask = document.querySelector("#newTask").value;
-
+    // vérifier que l'input n'est pas vide
     if (newTask == '') {
         alert("Vous ne pouvez pas ajouter une tâche vide !")
     } else {
-        // créer un nouvel élément dans la liste
+        // créer un nouvel élément dans la liste de tâches
         let newItem = document.createElement("li");
         // gérer le contenu de l'élément
         newItem.innerHTML = newTask;
         // ajouter l'élément enfant (l'item de la liste) à l'élément parent (la liste ul) pour qu'il s'affiche
         currentTasks.appendChild(newItem);
-
+        // afficher la liste si il y a des enfants à l'intérieur
         if (currentTasks.childNodes.length > 1) {
             currentContainer.classList.remove("d-none");
         }
 
-        // créer tous les boutons/icônes potentiels dans des variables et leur attribuer des classes et id
+        // créer tous les boutons/icônes dans des variables et leur attribuer des classes et id
         let checkBtn = document.createElement("i");
         checkBtn.classList.add("btn", "btn-outline-success", "fa-solid", "fa-check", "ms-1", "my-1");
         checkBtn.setAttribute('id', 'checkBtn');
@@ -79,6 +79,7 @@ submitBtn.addEventListener("click", () => {
         // comportement au clic du bouton SUPPRIMER
         deleteBtn.addEventListener('click', () => {
             newItem.remove();
+            // masquer les listes si elles sont vides
             if (currentTasks.childNodes.length <= 1) {
                 currentContainer.classList.add("d-none");
             }
